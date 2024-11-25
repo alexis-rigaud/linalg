@@ -1,7 +1,7 @@
 #include <stdbool.h>
 
 struct test {
-    bool (*test_f)(void);
+    bool (*test_f)();
     char* name;
 };
 
