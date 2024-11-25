@@ -50,7 +50,7 @@ struct linreg* linreg_fit(struct matrix* X, struct vector* y) {
         resid = VECTOR_IDX_INTO(y, i) - VECTOR_IDX_INTO(y_hat, i);
         sigma_resid_sq += resid * resid;
     }
-    double norm_factor = 1 / (lr->n - lr->p - 1);
+    double norm_factor = y->length - 1;
     double sigma_resid = sqrt(norm_factor * sigma_resid_sq);
     lr->y_hat = y_hat;
     lr->sigma_resid = sigma_resid;
