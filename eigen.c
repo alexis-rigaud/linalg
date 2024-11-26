@@ -69,7 +69,9 @@ struct vector* eigen_solve_eigenvalues(struct matrix* M,
         i++;
     } while(!matrix_is_upper_triangular(X, tol) && (i < max_iter));
 
-    return matrix_diagonal(X);
+    struct vector* diagonal = matrix_diagonal(X);
+    matrix_free(X);
+    return diagonal;
 }
 
 /* Solve for the eigenvectors of a matrix M once the eigenvalues are known
@@ -147,5 +149,6 @@ struct vector* eigen_backsolve(
     } while(!vector_equal(current, previous, tol) && (i < max_iter));
 
     vector_free(previous);
+    matrix_free(M_minus_lambda_I);
     return current;
 }
