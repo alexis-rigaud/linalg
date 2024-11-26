@@ -128,7 +128,7 @@ struct vector* eigen_backsolve(
 
     struct matrix* M_minus_lambda_I = matrix_M_minus_lambda_I(M, lambda);
 
-    double i = 0;
+    int i = 0;
     do {
         if(i > 0) {
             vector_free(previous);
