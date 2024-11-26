@@ -3,4 +3,5 @@
 linalg
 linalg.dSYM/
 *.o
+build
 
