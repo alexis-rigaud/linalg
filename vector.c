@@ -27,7 +27,7 @@ struct vector* vector_new(int length) {
     return new_vector;
 }
 
-/* Create a new vector which is a *view* into an already existing vector. 
+/* Create a new vector which is a *view* into an already existing vector.
 
    The new and parent vectors share the same data, and modifying the data in
    either will modify both vectors.  One the other hand, we do not have to copy
@@ -42,7 +42,7 @@ struct vector* vector_new_view(struct linalg_obj* parent, double* view, int leng
        This doesn't work because matricies have no length.  This could be
        a property of linalg_obj, but then a macro would be needed to
        make the lookup type generic.
-       
+
     assert(DATA(parent) <= view && view < DATA(parent) + parent->length);
     assert(view + length <= DATA(parent) + parent->length);
     */
@@ -157,7 +157,7 @@ void vector_copy_into(struct vector* reciever, struct vector* v) {
 }
 
 /* Arithmatic methods.
-    
+
     Each of the following methods implements an arithmetic operation on vectors.
   Each comes in two flavors, anaoagous to the + and += operators:
 
