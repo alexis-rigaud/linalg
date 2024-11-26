@@ -12,7 +12,7 @@ struct eigen* eigen_new() {
 
 void eigen_free(struct eigen* e) {
     vector_free(e->eigenvalues);
-    // matrix_free(e->eigenvectors);
+    matrix_free(e->eigenvectors);
     free(e);
 }
 

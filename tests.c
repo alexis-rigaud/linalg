@@ -402,7 +402,9 @@ bool test_matrix_is_upper_triangular() {
                   0.0, 0.5, 0.0,
                   0.0, 0.0, 4.0};
     struct matrix* M = matrix_from_array(D, 3, 3);
-    return matrix_is_upper_triangular(M, 0.01);
+    bool test = matrix_is_upper_triangular(M, 0.01);
+    matrix_free(M);
+    return test;
 }
 
 bool test_matrix_is_not_upper_triangular() {
@@ -410,7 +412,9 @@ bool test_matrix_is_not_upper_triangular() {
                   0.0, 0.5, 0.0,
                   1.0, 0.0, 4.0};
     struct matrix* M = matrix_from_array(D, 3, 3);
-    return !matrix_is_upper_triangular(M, 0.01);
+    bool test = !matrix_is_upper_triangular(M, 0.01);
+    matrix_free(M);
+    return test;
 }
 
 bool test_qr_decomp_identity() {
@@ -760,7 +764,7 @@ bool test_linreg_random() {
     struct linreg* lr = linreg_fit(X, y);
     bool test = vector_equal(true_beta, lr->beta, 0.01);
 
-    vector_free_many(3, true_beta, intercept, noise);
+    vector_free_many(4, true_beta, intercept, y, noise);
     matrix_free(X);
     linreg_free(lr);
     return test;
