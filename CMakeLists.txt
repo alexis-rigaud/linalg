@@ -2,8 +2,14 @@ cmake_minimum_required(VERSION 3.25)
 
 # -- build the library
 project(linalg LANGUAGES C)
+
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -O3")
+if(APPLE)
+    set(CMAKE_OSX_DEPLOYMENT_TARGET "14.0")
+endif()
+
 project(linalg)
-add_library(linalg SHARED
+add_library(linalg STATIC
     vector.c
     matrix.c
     errors.c
