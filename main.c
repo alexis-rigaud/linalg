@@ -5,6 +5,8 @@
 #include "matrix.h"
 #include "rand.h"
 
+void test_kernels(void);
+
 /*
 void time_matrix_multiply() {
     struct matrix* P;
@@ -43,6 +45,7 @@ void time_qr_decomp() {
 
 int main(int argc, char** argv) {
 
+    test_kernels();
     init_random();
     run_all();
 

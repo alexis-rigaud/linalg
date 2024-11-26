@@ -37,12 +37,14 @@ target_compile_features(linalg PRIVATE c_std_99)
 
 # -- build the test
 project(test LANGUAGES C)
-add_executable(test main.c tests.c)
-target_link_libraries(test linalg)
+set(OpenCL_VERSION 1.2)
+
+include_directories(${OpenCL_INCLUDE_DIRS})
+
+add_executable(test main.c tests.c kernels.c)
 target_compile_features(test PRIVATE c_std_90)
 
-#set(OpenCL_VERSION 1.2)
-#find_package(OpenCL REQUIRED)
-#include_directories(${OpenCL_INCLUDE_DIRS})
-#target_link_libraries(test linalg ${OpenCL_LIBRARIES})
+find_package(OpenCL REQUIRED)
+target_link_libraries(test linalg  ${OpenCL_LIBRARIES})
+
 
