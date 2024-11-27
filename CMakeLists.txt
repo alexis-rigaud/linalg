@@ -1,14 +1,14 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.7)
 
 # -- build the library
 project(linalg LANGUAGES C)
 
+set(OpenCL_VERSION 1.2)
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -O3")
 if(APPLE)
     set(CMAKE_OSX_DEPLOYMENT_TARGET "14.0")
 endif()
 
-project(linalg)
 add_library(linalg STATIC
     vector.c
     matrix.c
@@ -18,6 +18,7 @@ add_library(linalg STATIC
     eigen.c
     linreg.c
     rand.c
+    kernel.c
 )
 set_target_properties(linalg PROPERTIES PUBLIC_HEADER
     eigen.h
@@ -29,22 +30,22 @@ set_target_properties(linalg PROPERTIES PUBLIC_HEADER
     rand.h
     util.h
     vector.h
+    kernel.h
+    kernels.cl
 )
 
-#target_include_directories(linalg PUBLIC include)
-target_link_libraries(linalg PUBLIC)
+find_package(OpenCL REQUIRED)
+include_directories(${OpenCL_INCLUDE_DIRS})
+
 target_compile_features(linalg PRIVATE c_std_99)
+target_link_libraries(linalg PUBLIC ${OpenCL_LIBRARIES})
 
 # -- build the test
 project(test LANGUAGES C)
-set(OpenCL_VERSION 1.2)
 
-include_directories(${OpenCL_INCLUDE_DIRS})
-
-add_executable(test main.c tests.c kernels.c)
+add_executable(test main.c tests.c)
 target_compile_features(test PRIVATE c_std_90)
+target_link_libraries(test linalg)
 
-find_package(OpenCL REQUIRED)
-target_link_libraries(test linalg  ${OpenCL_LIBRARIES})
 
 

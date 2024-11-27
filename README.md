@@ -42,6 +42,12 @@ TODO
 -----
 
 [x] - add modern CMake support
-[ ] - add OpenCL kernels support
+[x] - add OpenCL kernels support
 [ ] - implement SVD
 [ ] - implement kernels
+
+Build info
+-----
+
+`rm -fr build; mkdir build; cd build; cmake ..; make`
+

@@ -8,8 +8,7 @@
 #include "vector.h"
 #include "matrix.h"
 #include "rand.h"
-
-void test_kernels(void);
+#include "kernel.h"
 
 /*
 void time_matrix_multiply() {
@@ -49,7 +48,7 @@ void time_qr_decomp() {
 
 int main(int argc, char** argv) {
 
-    test_kernels();
+    kernel_test();
     init_random();
     run_all();
 
