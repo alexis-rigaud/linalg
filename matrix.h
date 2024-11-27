@@ -1,3 +1,6 @@
+/* matrix.h
+  (c) Matthew Drury, 2017
+*/
 #pragma once
 #include <stdarg.h>
 #include "linalg_obj.h"

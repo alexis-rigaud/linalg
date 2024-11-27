@@ -1,3 +1,6 @@
+/* vector.h
+   (c) Matthew Drury, 2016
+*/
 #pragma once
 #include <stdbool.h>
 #include <stdarg.h>

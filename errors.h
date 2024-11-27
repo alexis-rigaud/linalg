@@ -1,3 +1,6 @@
+/* errors.h
+  (c) Matthew Drury, 2015
+*/
 #pragma once
 
 void raise_memory_allocation_error();

@@ -1,6 +1,8 @@
 linalg: Linear Algebra and Regression in C
 ===========================================
 
+> reboot  the Matthew Drury's linalg library, for computation on CPU, MCU and GPU target.
+
 `linalg` is a library for linear algebra and regression implemented in C.  The code is optimized for readability and clarity instead of raw efficiency (though it tries not to ignore issues of efficiency completely).
 
 Linear Algebra
@@ -28,3 +30,18 @@ Tests
 -----
 
 The routines in `linalg` are extensively unit tested, which also serve as simple examples of use.
+
+Copyright
+-----
+
+See files   
+(c) Matthew Drury, 2017   
+(c) Alexis Rigaud, 2024   
+
+TODO
+-----
+
+[x] - add modern CMake support
+[ ] - add OpenCL kernels support
+[ ] - implement SVD
+[ ] - implement kernels

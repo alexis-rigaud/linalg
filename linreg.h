@@ -1,3 +1,6 @@
+/* linreg.h
+  (c) Matthew Drury, 2016
+*/
 #include "vector.h"
 #include "matrix.h"
 

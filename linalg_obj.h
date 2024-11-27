@@ -1,3 +1,6 @@
+/* linalg_obj.h
+  (c) Matthew Drury, 2015
+*/
 #pragma once
 
 struct linalg_obj {

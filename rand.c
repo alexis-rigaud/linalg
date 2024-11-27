@@ -1,3 +1,6 @@
+/* rand.c
+  (c) Matthew Drury, 2016
+*/
 #include <assert.h>
 #include <time.h>
 #include <stdlib.h>

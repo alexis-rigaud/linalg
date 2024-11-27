@@ -1,8 +1,8 @@
 /* kernels.c
-
   (c) A. Rigaud, 2024
 
   openCl kernel wrapper
+
   to use :
 
   struct opencl opencl;
@@ -11,7 +11,6 @@
   void* kernel = init_kernel(&opencl, &params); // inits
   render_kernel(&opencl, kernel, &params); // loop i,j here
   free_opencl(&opencl, kernel); // free mem
-
 */
 
 #include <stdlib.h>

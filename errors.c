@@ -1,3 +1,6 @@
+/* errors.c
+  (c) Matthew Drury, 2015
+*/
 #include <stdlib.h>
 #include <stdio.h>
 #include "errors.h"

@@ -1,3 +1,6 @@
+/* util.c
+   (c) Matthew Drury, 2015
+*/
 #include <stdlib.h>
 #include "util.h"
 #include "errors.h"

@@ -1,3 +1,7 @@
+# Makefile
+# (c) Matthew Drury, 2017
+# (c) Alexis Rigaud, 2024
+
 all: clean linalg
 
 clean:

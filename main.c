@@ -1,3 +1,7 @@
+/* main.c
+  (c) Matthew Drury, 2016
+  (c) Alexis Rigaud, 2024
+*/
 #include <time.h>
 #include <stdio.h>
 #include "tests.h"

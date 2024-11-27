@@ -1,3 +1,7 @@
+/* tests.c
+   (c) Matthew Drury, 2017
+   (c) Alexis Rigaud, 2024
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>

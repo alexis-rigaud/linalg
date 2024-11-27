@@ -1,3 +1,7 @@
+/* eigen.c
+  (c) Matthew Drury, 2017
+  (c) Alexis Rigaud, 2024
+*/
 #include <assert.h>
 #include <stdlib.h>
 #include "vector.h"

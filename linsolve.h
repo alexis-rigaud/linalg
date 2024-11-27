@@ -1,3 +1,6 @@
+/* linsolve.h
+  (c) Matthew Drury, 2017
+*/
 #pragma once
 #include "vector.h"
 #include "matrix.h"

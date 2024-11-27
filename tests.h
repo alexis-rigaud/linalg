@@ -1,3 +1,6 @@
+/* tests.h
+   (c) Matthew Drury, 2015
+*/
 #include <stdbool.h>
 
 struct test {

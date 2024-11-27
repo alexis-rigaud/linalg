@@ -1,3 +1,6 @@
+/* linsolve.c
+  (c) Matthew Drury, 2017
+*/
 #include <assert.h>
 #include "vector.h"
 #include "matrix.h"

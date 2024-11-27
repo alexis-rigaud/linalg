@@ -1,3 +1,6 @@
+/* rand.h
+  (c) Matthew Drury, 2016
+*/
 #pragma once
 #include "vector.h"
 #include "matrix.h"

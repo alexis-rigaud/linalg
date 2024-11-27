@@ -1,3 +1,7 @@
+/* linreg.c
+  (c) Matthew Drury, 2017
+  (c) Alexis Rigaud, 2024
+*/
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
