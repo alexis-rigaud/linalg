@@ -1,5 +1,6 @@
 /* matrix.c
   (c) Matthew Drury, 2017
+  (c) Alexis Rigaud, 2024
 */
 #include <stdlib.h>
 #include <stdio.h>
@@ -39,6 +40,30 @@ struct matrix* matrix_from_array(double* data, int n_row, int n_col) {
         DATA(M)[i] = data[i];
     }
     return M;
+}
+
+/* in matlab / octave the matrix is stored as 'transposed' vector : row first, then col */
+struct matrix* matrix_from_matlab(double* data, int n_row, int n_col) {
+    assert(n_row >= 1 && n_col >= 1);
+    struct matrix* M = matrix_new(n_row, n_col);
+    int ii = 0;
+    for(int j = 0; j < M->n_col; j++) {
+        for(int i = 0; i < M->n_row; i++) {
+            MATRIX_IDX_INTO(M, i, j) = data[ii++];
+        }
+    }
+    return M;
+}
+
+/* in matlab / octave the matrix is stored as 'transposed' vector : row first, then col */
+void matrix_to_matlab(double* data, struct matrix* M) {
+    assert(M->n_row >= 1 && M->n_col >= 1);
+    int ii = 0;
+    for (int i = 0; i < M->n_row; i++) {
+        for (int j = 0; j < M->n_col; j++) {
+            data[ii++] = MATRIX_IDX_INTO(M, j, i);
+        }
+    }
 }
 
 void matrix_free(struct matrix* M) {

@@ -48,7 +48,7 @@ void time_qr_decomp() {
 
 int main(int argc, char** argv) {
 
-    kernel_test();
+    //kernel_test();
     init_random();
     run_all();
 

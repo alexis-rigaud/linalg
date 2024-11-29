@@ -1,5 +1,6 @@
 /* matrix.h
   (c) Matthew Drury, 2017
+  (c) Alexis Rigaud, 2024
 */
 #pragma once
 #include <stdarg.h>
@@ -24,6 +25,10 @@ struct matrix {
 
 struct matrix* matrix_new(int n_row, int n_col);
 struct matrix* matrix_from_array(double* data, int n_row, int n_col);
+
+struct matrix* matrix_from_matlab(double* data, int n_row, int n_col);
+void           matrix_to_matlab(double* data, struct matrix* M);
+
 void           matrix_free(struct matrix* M);
 void           matrix_free_many(int n_to_free, ...);
 

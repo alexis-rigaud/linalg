@@ -10,22 +10,20 @@
 #include <OpenCL/opencl.h>
 
 struct opencl {
-    cl_kernel kernel;
-    cl_context context;
+    cl_kernel        kernel;
+    cl_context       context;
     cl_command_queue queue;
-    cl_program program;
-    cl_platform_id platform;
-    cl_device_id device;
-    cl_mem output;
+    cl_program       program;
+    cl_platform_id   platform;
+    cl_device_id     device;
+    cl_mem           output;
 };
 
 struct params {
-    cl_int max_iterations;
-    cl_float center_re;
-    cl_float center_im;
-    cl_float scale;
-    cl_int width;
-    cl_int height;
+    cl_double* r;
+    cl_double* q;
+    cl_double* current_column;
+    cl_int     size;
 };
 
 /* OpenCL 1.2 error handler */
@@ -147,30 +145,28 @@ void init_opencl(struct opencl* opencl)
     //"-I/opt/homebrew/Cellar/llvm/19.1.3/lib/clang/19/include -I.."
     err = clBuildProgram(opencl->program, 1, &opencl->device, NULL, NULL, NULL);
     if (err) debug_opencl(opencl);
-    opencl->kernel = clCreateKernel(opencl->program, "mandelbrot_kernel", &err); // TODO compile all the kernels
+    opencl->kernel = clCreateKernel(opencl->program, "qr_kernel", &err); // TODO compile all the kernels
     if (err) opencl_err_hander(err);
 }
 
 // updage kernel input
 void kernel_inputs_update(struct opencl* opencl, struct params* params) {
-    clSetKernelArg(opencl->kernel, 1, sizeof(cl_float), &params->center_re);
-    clSetKernelArg(opencl->kernel, 2, sizeof(cl_float), &params->center_im);
-    clSetKernelArg(opencl->kernel, 3, sizeof(cl_float), &params->scale);
-    clSetKernelArg(opencl->kernel, 4, sizeof(cl_int), &params->max_iterations);
-    clSetKernelArg(opencl->kernel, 5, sizeof(cl_int), &params->width);
-    clSetKernelArg(opencl->kernel, 6, sizeof(cl_int), &params->height);
+    clSetKernelArg(opencl->kernel, 1, sizeof(cl_float*), &params->q);
+    clSetKernelArg(opencl->kernel, 2, sizeof(cl_float*), &params->r);
+    clSetKernelArg(opencl->kernel, 3, sizeof(cl_float*), &params->current_column);
+    clSetKernelArg(opencl->kernel, 4, sizeof(cl_int),    &params->size);
 }
 
 /* kernel memory init. */
 void* kernel_init(struct opencl* opencl, struct params* params)
 {
     cl_int err = 0;
-    void *kernel = malloc(params->width * params->height * sizeof(int));
+    void *kernel = malloc(params->size * sizeof(double));
     if (kernel == NULL) {
         printf("mem allocation failed\n");
         exit(EXIT_FAILURE);
     }
-    opencl->output = clCreateBuffer(opencl->context, CL_MEM_WRITE_ONLY, params->width * params->height * sizeof(int), NULL,  &err);
+    opencl->output = clCreateBuffer(opencl->context, CL_MEM_WRITE_ONLY, params->size * sizeof(double), NULL,  &err);
     if (err) opencl_err_hander(err);
     err = clSetKernelArg(opencl->kernel, 0, sizeof(cl_mem), &opencl->output);
     if (err) opencl_err_hander(err);
@@ -182,11 +178,11 @@ void* kernel_init(struct opencl* opencl, struct params* params)
 /* (simple) call to GPU kernel (update input, queue, run, read back) */
 void kernel_run(struct opencl* opencl, int *kernel, struct params* params)
 {
-    size_t globalWorkSize[2] = {params->width, params->height};
+    size_t globalWorkSize = params->size;
     kernel_inputs_update(opencl, params);
-    clEnqueueNDRangeKernel(opencl->queue, opencl->kernel, 2, NULL, globalWorkSize, NULL, 0, NULL, NULL);
+    clEnqueueNDRangeKernel(opencl->queue, opencl->kernel, 1, NULL, &globalWorkSize, NULL, 0, NULL, NULL);
     clFinish(opencl->queue);
-    clEnqueueReadBuffer(opencl->queue, opencl->output, CL_TRUE, 0, params->width * params->height * sizeof(int), kernel, 0, NULL, NULL);
+    clEnqueueReadBuffer(opencl->queue, opencl->output, CL_TRUE, 0, params->size * sizeof(double), kernel, 0, NULL, NULL);
 }
 
 /* free allocated mem */
@@ -201,16 +197,16 @@ void kernel_free(struct opencl* opencl, int *kernel)
 void kernel_test(void)
 {
   struct opencl opencl;
-  struct params params  = {
-        .max_iterations = 10,
-        .center_re = -0.5,
-        .center_im = 0,
-        .scale = 0.005,
-        .width = 10,
-        .height = 10
-    };
+  struct params params;
   init_opencl(&opencl);                         // init
   void* kernel = kernel_init(&opencl, &params); // memory init
+
+
+  params.r;
+  params.q;
+  params.current_column;
+  params.size;
+
   kernel_run(&opencl, kernel, &params);         // loop i,j here
   kernel_free(&opencl, kernel);                 // free mem
 }
