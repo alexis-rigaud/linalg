@@ -41,10 +41,11 @@ See files
 TODO
 -----
 
-[x] - add modern CMake support
-[x] - add OpenCL kernels support
-[ ] - implement SVD
-[ ] - implement kernels
+[x] - add modern CMake support   
+[x] - add OpenCL kernels support   
+[ ] - fix kernel compilation path
+[ ] - implement kernels   
+[ ] - implement SVD   
 
 Build info
 -----

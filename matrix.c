@@ -15,6 +15,7 @@
 #include "util.h"
 #include "linalg_obj.h"
 
+#include "kernel.h"
 
 struct matrix* matrix_new(int n_row, int n_col) {
     assert(n_row >= 1 && n_col >= 1);
@@ -256,6 +257,7 @@ struct matrix* matrix_multiply_cache(struct matrix* Mleft, struct matrix* Mright
 struct matrix* matrix_multiply(struct matrix* Mleft, struct matrix* Mright) {
     assert(Mleft->n_col == Mright->n_row);
     struct matrix* Mprod = matrix_zeros(Mleft->n_row, Mright->n_col);
+#ifndef OCL_KERNELS_SUPPORTED
     for(int i = 0; i < Mprod->n_row; i++) {
         for(int k = 0; k < Mleft->n_col; k++) {
             for(int j = 0; j < Mprod->n_col; j++) {
@@ -264,6 +266,9 @@ struct matrix* matrix_multiply(struct matrix* Mleft, struct matrix* Mright) {
             }
         }
     }
+#else
+    matrix_multiply_ocl(Mprod, Mleft, Mright);
+#endif
     return Mprod;
 }
 

@@ -48,7 +48,9 @@ void time_qr_decomp() {
 
 int main(int argc, char** argv) {
 
-    //kernel_test();
+#if OCL_KERNELS_SUPPORTED
+    kernel_test();
+#endif
     init_random();
     run_all();
 
