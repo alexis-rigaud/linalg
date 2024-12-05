@@ -47,10 +47,10 @@ struct matrix* matrix_from_array(double* data, int n_row, int n_col) {
 struct matrix* matrix_from_matlab(double* data, int n_row, int n_col) {
     assert(n_row >= 1 && n_col >= 1);
     struct matrix* M = matrix_new(n_row, n_col);
-    int ii = 0;
-    for(int j = 0; j < M->n_col; j++) {
-        for(int i = 0; i < M->n_row; i++) {
-            MATRIX_IDX_INTO(M, i, j) = data[ii++];
+    size_t ii = 0;
+    for(size_t i = 0; i < M->n_col; i++) {
+        for(size_t j = 0; j < M->n_row; j++) {
+            MATRIX_IDX_INTO(M, j, i) = data[ii++];
         }
     }
     return M;
@@ -59,9 +59,9 @@ struct matrix* matrix_from_matlab(double* data, int n_row, int n_col) {
 /* in matlab / octave the matrix is stored as 'transposed' vector : row first, then col */
 void matrix_to_matlab(double* data, struct matrix* M) {
     assert(M->n_row >= 1 && M->n_col >= 1);
-    int ii = 0;
-    for (int i = 0; i < M->n_row; i++) {
-        for (int j = 0; j < M->n_col; j++) {
+    size_t ii = 0;
+    for (size_t i = 0; i < M->n_col; i++) {
+        for (size_t j = 0; j < M->n_row; j++) {
             data[ii++] = MATRIX_IDX_INTO(M, j, i);
         }
     }
@@ -258,9 +258,9 @@ struct matrix* matrix_multiply(struct matrix* Mleft, struct matrix* Mright) {
     assert(Mleft->n_col == Mright->n_row);
     struct matrix* Mprod = matrix_zeros(Mleft->n_row, Mright->n_col);
 #ifndef OCL_KERNELS_SUPPORTED
-    for(int i = 0; i < Mprod->n_row; i++) {
-        for(int k = 0; k < Mleft->n_col; k++) {
-            for(int j = 0; j < Mprod->n_col; j++) {
+    for(size_t i = 0; i < Mprod->n_row; i++) {
+        for(size_t k = 0; k < Mleft->n_col; k++) {
+            for(size_t j = 0; j < Mprod->n_col; j++) {
                 MATRIX_IDX_INTO(Mprod, i, j) +=
                     MATRIX_IDX_INTO(Mleft, i, k) * MATRIX_IDX_INTO(Mright, k, j);
             }
