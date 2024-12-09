@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.7)
 project(linalg LANGUAGES C)
 
 set(OpenCL_VERSION 1.2)
+
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -O3")
 if(APPLE)
     set(CMAKE_OSX_DEPLOYMENT_TARGET "14.0")
@@ -34,6 +35,8 @@ set_target_properties(linalg PROPERTIES PUBLIC_HEADER
     kernels.cl
 )
 
+set_property(TARGET linalg PROPERTY POSITION_INDEPENDENT_CODE ON)
+
 find_package(OpenCL REQUIRED)
 include_directories(${OpenCL_INCLUDE_DIRS})
 
@@ -45,7 +48,7 @@ project(test LANGUAGES C)
 
 add_executable(test main.c tests.c)
 target_compile_features(test PRIVATE c_std_90)
-target_link_libraries(test linalg)
+target_link_libraries(test linalg m) # m = math lib
 
 
 

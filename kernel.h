@@ -2,10 +2,13 @@
   (c) A. Rigaud, 2024
 */
 
-// TODO : switch macos / others
+#ifdef __APPLE__
 #include <OpenCL/opencl.h>
+#else
+#include <CL/opencl.h>
+#endif
 
-
+#include <stdbool.h>
 #include "matrix.h"
 
 void kernel_test(void);
