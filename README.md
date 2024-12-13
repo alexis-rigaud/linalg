@@ -54,3 +54,8 @@ Build info
 
 `rm -fr build; mkdir build; cd build; cmake ..; make`
 
+OpenCL install
+-----
+
+See [Here](OpenCL.md)   
+
