@@ -42,10 +42,11 @@ TODO
 -----
 
 [x] - add modern CMake support   
-[x] - add OpenCL kernels support
-[ ] - use size_t for loop counters
-[ ] - use restrict pointer for data
-[ ] - fix kernel compilation path
+[x] - add OpenCL kernels support    
+[ ] - Use design pattern for openCL run    
+[ ] - use size_t for loop counters    
+[ ] - use restrict pointer for data    
+[ ] - fix kernel compilation path    
 [ ] - implement kernels   
 [ ] - implement SVD   
 

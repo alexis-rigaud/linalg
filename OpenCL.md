@@ -4,13 +4,15 @@ OpenCL
 Introduction
 ------------------
 
-OpenCL is a standard for multi-platform heterogeneous parallel programming. It is standardized and maintained by [Khronos Group](https://registry.khronos.org/OpenCL/).
+OpenCL is a _low-level, c-like language for high-performances heterogeneous data-parallel programming_ standard. 
 
-It allows to compile and run *kernels* on GPU for acceleration purpose of routines that are organized with the same operation over multiples dimensions.
+It is standardized and maintained by [Khronos Group](https://registry.khronos.org/OpenCL/).
+
+For instance it allows to compile and run *kernels* on GPU for acceleration purpose of routines that are organized with the same operation over multiples dimensions.
 
 OpenCL is the abbreviation of Open Compute language. It is a dialect of C99, and had been extended to C++.
 
-It features a Host / Kernel separation paradigm, with a detailed memory hierarchy (__global, __local, __constant, and __private).
+It features a Host / Kernel separation paradigm, folowing a SIMT (Single Instruction, Multiple Thread) execution model, with a detailed memory hierarchy (__global, __local, __constant, and __private) and synchronization mechanisms.
 
 GPUs & iGPUs
 ------------------
@@ -80,3 +82,11 @@ Here are some curated resources for OpenCL :
 | N/A | [clvk](https://github.com/kpet/clvk) | OpenCL running over Vulkan engine |
 | Google | [clspv](https://github.com/google/clspv) | OpenCL to Vulkan/SPIR compilation |
 | QEMU | [virtio-gpu](https://www.qemu.org/docs/master/system/devices/virtio-gpu.html) | virtual GPU reference |
+| krrishnarraj  | [clpeak](https://github.com/krrishnarraj/clpeak)  | A benchmark an profiling tool tool for OpenCL |
+| krrishnarraj  | [libopencl-stub](https://github.com/krrishnarraj/libopencl-stub)  | Stubs for opencl libraries loading |
+| Qualcomm  | [OpenCLCppRunner](https://github.com/octoml/qualcomm/tree/master/apps/OpenCLCppRunner)  | Example of kernel implemenation and testing   |
+| OCL-dev    | [ocl-icd](https://github.com/OCL-dev/ocl-icd) | A BSD-2 open source implementation of ICD loading | 
+| Course | [Hands On OpenCL](https://handsonopencl.github.io/) | lecture on OpenCL programming |
+| Course | [Introduction](https://www.youtube.com/playlist?list=PLiwt1iVUib9s6vyEqdpcgAq7NBRlp9mAY) & [optimization](https://www.youtube.com/playlist?list=PLiwt1iVUib9sUMi0ujVw0Tr7NppCjZtWg) | youtube lectures on OpenCL from David Black-Schaffer (Uppsala)|
+| Doc  | [Nvidia OpenCL guide](https://developer.download.nvidia.com/compute/DevZone/docs/html/OpenCL/doc/OpenCL_Best_Practices_Guide.pdf) | Nvidia OpenCL best practices guide |
+| BSC | [extrae](https://tools.bsc.es/extrae)  &  [paraver](https://tools.bsc.es/paraver) | tracing tools supporting OpenCL |
